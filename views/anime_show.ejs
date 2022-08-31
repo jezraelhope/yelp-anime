@@ -1,0 +1,61 @@
+<%- include("partials/header") %>
+
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-6 show_image-container">
+            <img src="<%= anime.image %>" alt="Anime Image">
+        </div>
+        <div class="col-6 show_details-container">
+            <h1><%= anime.title%></h1>
+            <p><%= anime.description%></p>
+            <table class="table">
+                <tbody>
+                  <tr>
+                    <th scope="row">Writer</th>
+                    <td><%= anime.writer%></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Studio</th>
+                    <td><%= anime.studio%></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Number of Seasons</th>
+                    <td><%= anime.seasons%></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Genre</th>
+                    <td><%= anime.genre%></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Story Completed</th>
+                    <td><%= anime.storyCompleted%></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Release Date</th>
+                    <td><%= anime.releaseDate %></td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+              <a href="/anime/<%= anime._id%>/edit">
+                <button class="btn btn-outline-info btn-lg btn-block mb-2">Edit</button>
+              </a>
+              <form action="/anime/<%= anime._id %>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-outline-danger btn-lg btn-block">Delete</button>
+              </form>
+        </div>
+    </div>
+    <div class="row mt-3 show_comment-header">COMMENT HEADER</div>
+    <% comments.forEach(comment => { %>
+      <div class="row show_comment-container py-2">
+          <div class="col-3">
+            <%= comment.user %>
+          </div>
+          <div class="col-9">
+            <%= comment.text %>
+          </div>
+      </div>
+    <% }) %>
+</div>
+
+<%- include("partials/footer") %>

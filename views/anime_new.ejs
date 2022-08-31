@@ -1,0 +1,61 @@
+<%- include("partials/header") %>
+    <div class="container">
+        <h1>Add New Anime</h1>
+        <form action="/anime" method="post">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" placeholder="e.g. Sailor Moon" autofocus>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" name="description">
+            </div>
+            <div class="form-group">
+                <label for="writer">Writer</label>
+                <input type="text" class="form-control" name="writer" placeholder="Sukehiro Tomita">
+            </div>
+            <div class="form-group">
+                <label for="studio">Studio</label>
+                <input type="text" class="form-control" name="studio" placeholder="Toei Animation">
+            </div>
+            <div class="form-group">
+                <label for="seasons">Number of Seasons</label>
+                <input type="number" class="form-control" name="seasons" placeholder="5">
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <select name="genre" id="genre" class="form-control">
+                    <option disabled selected> -- Choose Below -- </option>
+                    <option>Romance</option>
+                    <option>Comedy</option>
+                    <option>Seinen</option>
+                    <option>Isekai</option>
+                    <option>Mecha</option>
+                    <option>Sports</option>
+                    <option>Psychological</option>
+                    <option>Horror</option>
+                    <option>Adventure</option>
+                    <option>SciFi</option>
+                    <option>Slice-of-Life</option>
+                    <option>Shoujo</option>
+                    <option>Shonen</option>
+
+                </select>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" name="storyCompleted" class="form-check-input">
+                <label for="storyCompleted">Story Completed?</label>
+            </div>
+            <div class="form-group">
+                <label for="releaseDate">Release Date</label>
+                <input type="date" class="form-control" name="releaseDate">
+            </div>
+            <div class="form-group">
+                <label for="image">Link to Image</label>
+                <input type="url" class="form-control" name="image" placeholder="https://www.image.com">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+<%- include("partials/footer") %>

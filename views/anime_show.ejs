@@ -38,7 +38,7 @@
                 </tbody>
               </table>
               <a href="/anime/<%= anime._id%>/edit">
-                <button class="btn btn-outline-info btn-lg btn-block mb-2">Edit</button>
+                <button class="btn btn-outline-info btn-lg btn-block mb-2"> Edit </button>
               </a>
               <form action="/anime/<%= anime._id %>?_method=DELETE" method="POST">
                 <button type="submit" class="btn btn-outline-danger btn-lg btn-block">Delete</button>
@@ -46,16 +46,31 @@
         </div>
     </div>
     <div class="row mt-3 show_comment-header">COMMENT HEADER</div>
+
+    <a href="/anime/<%= anime._id%>/comments/new">
+
+      <button class="btn btn-success btn-large mb-4 mt-3">Add Comment</button>
+      
+    </a>
+
     <% comments.forEach(comment => { %>
-      <div class="row show_comment-container py-2">
-          <div class="col-3">
+      <div class="row show_comment-container py-2 border">
+          <div class="col-2 border-right my-auto">
             <%= comment.user %>
           </div>
-          <div class="col-9">
+          <div class="col-2 border-right my-auto d-flex flex-wrap justify-content-center">
+            <a href="/anime/<%= anime._id %>/comments/<%= comment._id%>/edit" class="btn btn-sm btn-success w-75 p-0 my-1">Edit</a>
+            <form action="/anime/<%= anime._id %>/comments/<%= comment._id %>?_method=DELETE" class="w-75 my-1" method="POST">
+              <button class="btn btn-danger btn-sm p-0 w-100">Delete</button>
+            </form>
+          </div>
+          <div class="col-8 my-auto">
             <%= comment.text %>
           </div>
       </div>
     <% }) %>
+
+    <div class="py-5"></div>
 </div>
 
 <%- include("partials/footer") %>

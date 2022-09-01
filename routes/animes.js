@@ -4,21 +4,20 @@ const Anime = require('../models/anime');
 const Comment = require('../models/comment');
 
 //Index
-router.get("/", (req, res) => {
-    Anime.find()
-    .exec()
-    .then((foundAnime) => {
-        res.render("anime", {animes: foundAnime})
-    })
-    .catch((err) => {
+router.get("/", async (req, res) => {
+    try {
+        const animes = await Anime.find().exec();
+        res.render("anime", {animes})
+
+    } catch (err){
         console.log(err)
-        res.send(err)
-    })
+        res.send("you broke it.. /index")
+    }
 })
 
 
 //Create
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const genre = req.body.genre.toLowerCase();
     const newAnime = {
         title: req.body.title,
@@ -31,14 +30,15 @@ router.post("/", (req, res) => {
         releaseDate: req.body.releaseDate,
         image: req.body.image
     }
-    Anime.create(newAnime)
-    .then((anime) => {
+    try {
+        const anime = await Anime.create(newAnime)
+        console.log(anime)
         res.redirect(`/anime/${anime._id}`)
-    })
-    .catch((err) => {
+
+    } catch (err) {
         console.log(err)
-        res.redirect('/anime')
-    })
+        res.send("This is broken... /POST")
+    }
 })
 
 
@@ -48,37 +48,33 @@ router.get("/new", (req, res) => {
 })
 
 //Show
-router.get('/:id', (req, res) => {
-    Anime.findById(req.params.id)
-    .exec()
-    .then((anime) => {
-        Comment.find({comicId: req.params.id}, (err, comments) => {
-            if(err) {
-                res.send(err)
-            } else {
-                res.render('anime_show', {anime, comments})
-            }
-        })
-
-    })
-    .catch((err) => {
-        res.send(err)
-    })
+router.get('/:id', async (req, res) => {
+    try {
+        const anime = await Anime.findById(req.params.id).exec()
+        const comments = await Comment.find({animeId: req.params.id});
+        res.render("anime_show", {anime, comments})
+        
+    } catch(err) {
+        console.log(err)
+        res.send("IZZ broken... /anime/:id")
+    }
 })
 
 //Edit
-router.get("/:id/edit", (req, res) => {
-    Anime.findById(req.params.id)
-    .exec()
-    .then(anime => {
+router.get("/:id/edit", async (req, res) => {
+    try {
+        const anime = await Anime.findById(req.params.id).exec();
         res.render("anime_edit", {anime})
-    })
+    } catch (err) {
+        console.log(err)
+        res.send("Beep boop beep... /anime/:id/edit")
+    }
 })
 
 //Update
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
     const genre = req.body.genre.toLowerCase();
-    const anime = {
+    const animeBody = {
         title: req.body.title,
         description: req.body.description,
         writer: req.body.writer,
@@ -90,29 +86,25 @@ router.put("/:id", (req, res) => {
         image: req.body.image
     }
 
-    Anime.findByIdAndUpdate(req.params.id, anime, {new:true})
-    .exec()
-    .then(updatedAnime => {
-        console.log(updatedAnime)
+    try {
+        const anime = await Anime.findByIdAndUpdate(req.params.id, animeBody, {new:true}).exec()
         res.redirect(`/anime/${req.params.id}`)
-    })
-    .catch(err => {
-        res.send("Error!!", err)
-    })
+    } catch (err) {
+        console.log(err)
+        res.send("Error!!")
+    }
 })
 
 //Delete
 
-router.delete("/:id", (req, res) => {
-    Anime.findByIdAndDelete(req.params.id)
-    .exec()
-    .then(deletedAnime => {
+router.delete("/:id", async (req, res) => {
+    try {
+        const deletedAnime = await Anime.findByIdAndDelete(req.params.id).exec()
         console.log("Deleted:", deletedAnime)
         res.redirect("/anime")
-    })
-    .catch(err => {
-        res.send("Error Deletinng:", err)
-    })
+    } catch (err) {
+        res.send("ERROR!!! /DELETE")
+    }
 })
 
 module.exports = router

@@ -4,10 +4,6 @@
     <h1>Add New Comment</h1>
     <form action="/anime/<%= animeId %>/comments" method="POST">
         <div class="form-group">
-            <label for="user">Username</label>
-            <input type="text" name="user" id="user" class="form-control" placeholder="Username" required autofocus>
-        </div>
-        <div class="form-group">
             <label for="text">Comment Text</label>
             <textarea name="text" rows="8" cols="80" id="text" class="form-control" placeholder="Comment text here..." required></textarea>
         </div>

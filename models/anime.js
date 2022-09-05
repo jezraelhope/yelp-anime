@@ -9,7 +9,18 @@ const animeSchema = new mongoose.Schema({
     genre: String,
     storyCompleted: Boolean,
     releaseDate: Date,
-    image: String
+    image: String,
+    owner: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+        },
+        username: String
+    }
 })
+
+animeSchema.index({
+    '$**': 'text'
+});
 
 module.exports = mongoose.model("anime", animeSchema);

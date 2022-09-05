@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Anime = require('../models/anime');
 const Comment = require('../models/comment');
+const isLoggedIn = require('../utils/isLoggedIn');
+const checkAnimeOwner = require('../utils/checkAnimeOwner')
 
 //Index
 router.get("/", async (req, res) => {
@@ -13,11 +15,11 @@ router.get("/", async (req, res) => {
         console.log(err)
         res.send("you broke it.. /index")
     }
-})
+});
 
 
 //Create
-router.post("/", async (req, res) => {
+router.post("/", isLoggedIn, async (req, res) => {
     const genre = req.body.genre.toLowerCase();
     const newAnime = {
         title: req.body.title,
@@ -28,7 +30,11 @@ router.post("/", async (req, res) => {
         genre,
         storyCompleted: !!req.body.storyCompleted,
         releaseDate: req.body.releaseDate,
-        image: req.body.image
+        image: req.body.image,
+        owner: {
+            id: req.user._id,
+            username: req.user.username
+        }
     }
     try {
         const anime = await Anime.create(newAnime)
@@ -43,8 +49,24 @@ router.post("/", async (req, res) => {
 
 
 //New
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("anime_new");
+})
+
+//Search
+router.get("/search", async (req, res) => {
+    try{
+        const anime = await Anime.find({
+            $text: {
+                $search: req.query.term
+            }
+        });
+        console.log(req.query.term)
+        res.render("anime", {anime})
+    } catch(err) {
+        console.log(err)
+        res.send("broken search")
+    }
 })
 
 //Show
@@ -61,18 +83,13 @@ router.get('/:id', async (req, res) => {
 })
 
 //Edit
-router.get("/:id/edit", async (req, res) => {
-    try {
-        const anime = await Anime.findById(req.params.id).exec();
-        res.render("anime_edit", {anime})
-    } catch (err) {
-        console.log(err)
-        res.send("Beep boop beep... /anime/:id/edit")
-    }
+router.get("/:id/edit", checkAnimeOwner, async (req, res) => {
+    const anime = await Anime.findById(req.params.id).exec();
+    res.render("anime_edit", {anime});
 })
 
 //Update
-router.put("/:id", async (req, res) => {
+router.put("/:id", checkAnimeOwner, async (req, res) => {
     const genre = req.body.genre.toLowerCase();
     const animeBody = {
         title: req.body.title,
@@ -97,7 +114,7 @@ router.put("/:id", async (req, res) => {
 
 //Delete
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", checkAnimeOwner, async (req, res) => {
     try {
         const deletedAnime = await Anime.findByIdAndDelete(req.params.id).exec()
         console.log("Deleted:", deletedAnime)

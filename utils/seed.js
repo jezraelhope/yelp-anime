@@ -44,17 +44,17 @@ const seed = async () => {
     await Comment.deleteMany();
     console.log("deleted all comments")
 
-    for (const anime_seed of anime_seeds) {
-        let anime = await Anime.create(anime_seed)
-        console.log("Created a new Anime!!!", anime.title)
+    // for (const anime_seed of anime_seeds) {
+    //     let anime = await Anime.create(anime_seed)
+    //     console.log("Created a new Anime!!!", anime.title)
 
-        await Comment.create({
-            user: "gruler05",
-            text: "The best Anime!!",
-            animeId: anime._id
-        })
-        console.log("created a new comment")
-    }
+    //     await Comment.create({
+    //         user: "gruler05",
+    //         text: "The best Anime!!",
+    //         animeId: anime._id
+    //     })
+    //     console.log("created a new comment")
+    // }
 }
 
 module.exports = seed;

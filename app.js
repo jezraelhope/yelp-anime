@@ -5,6 +5,7 @@
 //NPM Imports
 const express = require('express');
 const app = express();
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
 const morgan = require('morgan')
@@ -15,7 +16,12 @@ const expressSession = require('express-session')
 
 
 //Config Imports
-const config = require("./config");
+try{
+    var config = require("./config");
+} catch (err) {
+    console.log("Could not import config. Not working locally");
+    console.log(err)
+}
 
 //Model Imports
 const Anime = require('./models/anime');
@@ -43,8 +49,12 @@ app.use(morgan('tiny'))
 //========================
 
 //Connect to DB
-const mongoose = require('mongoose');
-mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true});
+try {
+    mongoose.connect(config.db.connection, {useNewUrlParser: true, useUnifiedTopology: true});
+} catch (err) {
+    console.log("Could not connect. Not Working Locally")
+    mongoose.connect(process.env.DB_CONNECTION_STRING, {useNewUrlParser: true, useUnifiedTopology: true})
+}
 
 // Express Config
 app.set("view engine", "ejs");
@@ -53,7 +63,7 @@ app.use(express.static('public'));
 //Express Session Config
 
 app.use(expressSession({
-    secret: "asjfajbdf jkidhfjsdbsdjbfgdjf",
+    secret: process.env.ES_SECRET || config.expressSession.secret,
     resave: false,
     saveUninitialized: false
 }));
@@ -88,6 +98,6 @@ app.use("/anime/:id/comments", commentRoutes);
 //========================
 
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("YAYYYY!!!")
 });

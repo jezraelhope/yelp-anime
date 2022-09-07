@@ -30,7 +30,7 @@ router.post('/signup', async (req, res) => {
 
 // Log In Show Form
 router.get('/login', (req, res) => {
-    res.render('login')
+    res.render('login', {message: req.flash("error") })
 })
 
 //Login

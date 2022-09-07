@@ -23,11 +23,11 @@ router.post('/', isLoggedIn, async (req, res) => {
             text: req.body.text,
             animeId: req.body.animeId
         });
-        console.log(comment);
+        req.flash("success", "Comment created!")
         res.redirect(`/anime/${req.body.animeId}`);
     } catch (err) {
-        console.log(err)
-        res.send("BROKENNN!! POST /comments")
+        req.flash("error", "Error creating comment")
+        res.redirect("anime")
     }
 })
 
@@ -39,8 +39,7 @@ router.get('/:commentId/edit', checkCommentOwner, async (req, res) => {
         const comment = await Comment.findById(req.params.commentId).exec();
         res.render("comments_edit", {anime, comment})
     } catch (err) {
-        console.log(err)
-        res.send("Broken comment edit /Edit")
+        res.redirect("/anime")
     }
 })
 
@@ -49,10 +48,11 @@ router.get('/:commentId/edit', checkCommentOwner, async (req, res) => {
 router.put('/:commentId', checkCommentOwner, async (req, res) => {
     try {
         const comment = await Comment.findByIdAndUpdate(req.params.commentId, {text: req.body.text}, {new:true}).exec()
-        console.log(comment)
+        req.flash("success", "Comment edited successfully!")
         res.redirect(`/anime/${req.params.id}`)
-
+        
     } catch (err) {
+        req.flash("error", "Error editing comment")
         console.log(err);
         res.send("Brooooke Comment /PUT")
     }
@@ -63,11 +63,11 @@ router.put('/:commentId', checkCommentOwner, async (req, res) => {
 router.delete('/:commentId', checkCommentOwner, async (req, res) => {
     try {
         const comment = await Comment.findByIdAndDelete(req.params.commentId);
-        console.log(comment);
+        req.flash("success", "Comment deleted")
         res.redirect(`/anime/${req.params.id}`)
     } catch (err){
-        console.log(err)
-        res.send("Error Deleting??! /DELETE")
+        req.flash("error", "Error deleting comment")
+        res.redirect("/anime")
     }
 });
 

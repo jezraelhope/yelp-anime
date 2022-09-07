@@ -62,6 +62,7 @@
     <% } %>
   </nav>
   <div class="container mt-2">
+    
     <% if (successMessage && successMessage.length > 0) { %>
       <div class="alert alert-success fade show" role="alert">
         <%= successMessage %>
@@ -70,6 +71,7 @@
         </button>
       </div>
     <% } %>
+
     <% if (errorMessage && errorMessage.length > 0) { %>
       <div class="alert alert-warning fade show" role="alert">
         <%= errorMessage %>

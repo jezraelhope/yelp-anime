@@ -48,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label for="releaseDate">Release Date</label>
-                <input type="date" class="form-control" name="releaseDate" value="<%= anime.releaseDate.toISOString().split('T')[0] %>">
+                <input type="date" class="form-control" name="releaseDate" value="<%= anime.releaseDate ? anime.releaseDate.toISOString().split('T')[0] : 00/00/0000 %>">
             </div>
             <div class="form-group">
                 <label for="image">Link to Image</label>

@@ -38,12 +38,12 @@ router.post("/", isLoggedIn, async (req, res) => {
     }
     try {
         const anime = await Anime.create(newAnime)
-        console.log(anime)
+        req.flash("success", "Anime created!")
         res.redirect(`/anime/${anime._id}`)
 
     } catch (err) {
-        console.log(err)
-        res.send("This is broken... /POST")
+        req.flash("error", "Error creating comic")
+        res.redirect("/anime");
     }
 })
 
@@ -116,10 +116,12 @@ router.put("/:id", checkAnimeOwner, async (req, res) => {
 
     try {
         const anime = await Anime.findByIdAndUpdate(req.params.id, animeBody, {new:true}).exec()
+        req.flash("success", "Anime updated!")
         res.redirect(`/anime/${req.params.id}`)
     } catch (err) {
         console.log(err)
-        res.send("Error!!")
+        req.flash("error", "Error Updating Comic!")
+        res.redirect('/anime');
     }
 })
 
@@ -128,10 +130,11 @@ router.put("/:id", checkAnimeOwner, async (req, res) => {
 router.delete("/:id", checkAnimeOwner, async (req, res) => {
     try {
         const deletedAnime = await Anime.findByIdAndDelete(req.params.id).exec()
-        console.log("Deleted:", deletedAnime)
+        req.flash("success", "Anime deleted!")
         res.redirect("/anime")
     } catch (err) {
-        res.send("ERROR!!! /DELETE")
+        req.flash("error", "Error deletign anime")
+        res.redirect("back")
     }
 })
 

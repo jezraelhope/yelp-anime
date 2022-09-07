@@ -16,12 +16,10 @@ router.post('/signup', async (req, res) => {
             email: req.body.email,
             username: req.body.username
         }), req.body.password);
-
-        console.log(newUser);
-
         passport.authenticate('local')(req, res, () => {
             res.redirect('/anime')
         });
+        req.flash("success", `Signed you up as ${newUser.username}`);
     } catch (err) {
         console.log(err);
         res.send(err)
@@ -30,13 +28,15 @@ router.post('/signup', async (req, res) => {
 
 // Log In Show Form
 router.get('/login', (req, res) => {
-    res.render('login', {message: req.flash("error") })
+    res.render('login')
 })
 
 //Login
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/anime',
-    failureRedirect: '/login'
+    failureRedirect: '/login',
+    failureFlash: true,
+    successFlash: "Logged in successfully!"
 }));
 
 // Lgout
@@ -46,6 +46,7 @@ router.get("/logout", (req, res, next) => {
         if(err) {
             return next(err)
         }
+        req.flash("success", "Logged you out!")
         res.redirect('/anime');
     });
 });

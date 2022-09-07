@@ -13,24 +13,26 @@
               Genres
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Romance</a>
-                <a class="dropdown-item" href="#">Comedy</a>
-                <a class="dropdown-item" href="#">Seinen</a>
-                <a class="dropdown-item" href="#">Isekai</a>
-                <a class="dropdown-item" href="#">Mecha</a>
-                <a class="dropdown-item" href="#">Sports</a>
-                <a class="dropdown-item" href="#">Psychological</a>
-                <a class="dropdown-item" href="#">Horror</a>
-                <a class="dropdown-item" href="#">Adventure</a>
-                <a class="dropdown-item" href="#">SciFi</a>
-                <a class="dropdown-item" href="#">Slice of Life</a>
-                <a class="dropdown-item" href="#">Shoujo</a>
-                <a class="dropdown-item" href="#">Shonen</a>
+                <a class="dropdown-item" href="/anime/genre/romance">Romance</a>
+                <a class="dropdown-item" href="/anime/genre/comdey">Comedy</a>
+                <a class="dropdown-item" href="/anime/genre/seinen">Seinen</a>
+                <a class="dropdown-item" href="/anime/genre/isekai">Isekai</a>
+                <a class="dropdown-item" href="/anime/genre/mecha">Mecha</a>
+                <a class="dropdown-item" href="/anime/genre/sports">Sports</a>
+                <a class="dropdown-item" href="/anime/genre/psychological">Psychological</a>
+                <a class="dropdown-item" href="/anime/genre/horror">Horror</a>
+                <a class="dropdown-item" href="/anime/genre/adventure">Adventure</a>
+                <a class="dropdown-item" href="/anime/genre/scifi">SciFi</a>
+                <a class="dropdown-item" href="/anime/genre/slice-of-life">Slice of Life</a>
+                <a class="dropdown-item" href="/anime/genre/shoujo">Shoujo</a>
+                <a class="dropdown-item" href="/anime/genre/shonen">Shonen</a>
             </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/anime/new">Add Anime</a>
-        </li>
+        <%if (user) { %>
+          <li class="nav-item">
+            <a class="nav-link" href="/anime/new">Add Anime</a>
+          </li>
+        <% } %>
 
         <% if(user) {%>
 

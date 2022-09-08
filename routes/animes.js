@@ -92,49 +92,56 @@ router.post("/vote", isLoggedIn, async (req, res) => {
     const alreadyUpvoted = anime.upVotes.indexOf(req.user.username)
     const alreadyDownvoted = anime.downVotes.indexOf(req.user.username)
 
-    if (alreadyUpvoted === -1 && alreadyDownvoted === -1) {
-        if(req.body.voteType === "up") {
+    if (alreadyUpvoted === -1 && alreadyDownvoted === -1) { //Has not voted
+        if(req.body.voteType === "up") { //Upvoting
+
             anime.upVotes.push(req.user.username)
             anime.save()
-            response.message = "Upvote Tallied!"
+            response = {message: "Upvote Tallied!", code: 1}
+
         } else if(req.body.voteType === "down") {
+
             anime.downVotes.push(req.user.username)
             anime.save()
-            response.message = "Downvote Tallied!"
+            response = {message: "Downvote Tallied!", code: -1}
+
         } else {
-            response.message = "Error 1"
+            response = {message: "Error 1", code: "err"}
         }
     } else if(alreadyUpvoted >= 0) { //Already Upvoted
         if(req.body.voteType === "up") {
             anime.upVotes.splice(alreadyUpvoted, 1);
             anime.save()
-            response.message = "Upvote Removed"
+            response = {message: "Upvote Removed", code: 0}
         } else if(req.body.voteType === "down") {
             anime.upVotes.splice(alreadyUpvoted, 1);
             anime.downVotes.push(req.user.username);
             anime.save()
-            response.message = "Changed to downvoted"
+            response = {message: "Changed to downvoted", code: -1}
         } else {
-            response.message = "Error 2"
+            response = {message: "Error 2", code: "err"}
         }
     } else if(alreadyDownvoted >= 0) { //Already Downvoted
         if(req.body.voteType === "up") {
             anime.downVotes.splice(alreadyDownvoted, 1);
             anime.upVotes.push(req.user.username);
             anime.save();
-            response.message = "Changed to Upvote"
+            response = {message: "Changed to Upvote", code:1}
         } else if(req.body.voteType === "down") {
             anime.downVotes.splice(alreadyDownvoted, 1);
             anime.save();
-            response.message = "Removed Downvote"
+            response = {message: "Removed Downvote", code: 0}
 
         } else {
-            response.message = "Error 3"
+            response = {message: "Error 3", code: "err"}
         }
 
     } else {
-        response.message = "Error 4"
+        response = {message: "Error 4", code: "err"}
     }
+
+    //Update Score
+    response.score = anime.upVotes.length - anime.downVotes.length;
 
     res.json(response);
 })

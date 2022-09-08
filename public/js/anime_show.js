@@ -9,15 +9,23 @@ const upvoteBtn = document.getElementById("upvote-btn");
 
 
 // ==================================
-//ADD EVENT LISTENERS
+//SEND VOTE
 // ==================================
-upvoteBtn.addEventListener("click", async function(){
+
+const sendVote = async (voteType) => {
     const options = {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({vote: "up"})
+        }
+        //,body: ""
+    }
+    if(voteType === "up") {
+        options.body = JSON.stringify({vote: "up"})
+    } else if(voteType === "down") {
+        options.body = JSON.stringify({vote: "down"})
+    } else {
+        throw "voteType must be 'up' or 'down' "
     }
 
     await fetch("/anime/vote", options)
@@ -30,4 +38,15 @@ upvoteBtn.addEventListener("click", async function(){
     .catch(err => {
         console.log(err)
     }) 
+
+}
+
+// ==================================
+//ADD EVENT LISTENERS
+// ==================================
+upvoteBtn.addEventListener("click", async function(){
+    sendVote("up")
+})
+downvoteBtn.addEventListener("click", async function(){
+    sendVote("down")
 })

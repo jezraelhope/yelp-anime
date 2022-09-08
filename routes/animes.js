@@ -34,7 +34,9 @@ router.post("/", isLoggedIn, async (req, res) => {
         owner: {
             id: req.user._id,
             username: req.user.username
-        }
+        },
+        upVotes: [req.user.username],
+        downVotes: []
     }
     try {
         const anime = await Anime.create(newAnime)

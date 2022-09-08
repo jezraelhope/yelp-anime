@@ -55,9 +55,13 @@
         <button class="btn btn-success btn-large mb-4 mt-3">Add Comment</button>
       </a>
       <div class="col-2">
-        <button id="downvote-btn" class="btn btn-outline-danger btn-lg mt-3">-</button>
+        <% if (user) { %>
+          <button id="downvote-btn" class="btn btn-outline-danger btn-lg mt-3">-</button>
+        <% } %>
         <span id="score" class="mx-1">10</span>
+        <% if (user) { %>
         <button id="upvote-btn" class="btn btn-outline-success btn-lg mt-3">+</button>
+        <% } %>
       </div>
     </div>
 

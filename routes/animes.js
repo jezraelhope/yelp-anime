@@ -82,6 +82,14 @@ router.get("/genre/:genre", async (req, res) => {
     }
 })
 
+//Vote
+
+router.post("/vote", isLoggedIn, (req, res) => {
+    res.json({
+        message: "Voted!"
+    })
+})
+
 //Show
 router.get('/:id', async (req, res) => {
     try {
@@ -94,6 +102,7 @@ router.get('/:id', async (req, res) => {
         res.send("IZZ broken... /anime/:id")
     }
 })
+
 
 //Edit
 router.get("/:id/edit", checkAnimeOwner, async (req, res) => {

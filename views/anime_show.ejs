@@ -47,13 +47,19 @@
               <% } %>
         </div>
     </div>
-    <div class="row mt-3 show_comment-header">COMMENT HEADER</div>
 
-    <a href="/anime/<%= anime._id%>/comments/new">
+    <div class="row mt-3 show_comment-header">COMMENTS:</div>
 
-      <button class="btn btn-success btn-large mb-4 mt-3">Add Comment</button>
-      
-    </a>
+    <div class="row">
+      <a href="/anime/<%= anime._id%>/comments/new" class="col-3">
+        <button class="btn btn-success btn-large mb-4 mt-3">Add Comment</button>
+      </a>
+      <div class="col-2">
+        <button id="downvote-btn" class="btn btn-outline-danger btn-lg mt-3">-</button>
+        <span id="score" class="mx-1">10</span>
+        <button id="upvote-btn" class="btn btn-outline-success btn-lg mt-3">+</button>
+      </div>
+    </div>
 
     <% comments.forEach(comment => { %>
       <div class="row show_comment-container py-2 border">

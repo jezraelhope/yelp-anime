@@ -38,7 +38,7 @@ const authRoutes = require('./routes/auth')
 // DEVELOPMENT
 //========================
 //Morgan
-app.use(morgan('tiny'))
+//app.use(morgan('tiny'))
 
 // //Seed the DB
 // const seed = require('./utils/seed');
@@ -59,6 +59,9 @@ try {
 // Express Config
 app.set("view engine", "ejs");
 app.use(express.static('public'));
+app.use(express.json({
+    type: ["application/json", "text/plain"]
+}))
 
 //Express Session Config
 
@@ -104,5 +107,5 @@ app.use("/anime/:id/comments", commentRoutes);
 
 
 app.listen(process.env.PORT || 3000, () => {
-    console.log("YAYYYY!!!")
+    console.log("yelp anime is running")
 });

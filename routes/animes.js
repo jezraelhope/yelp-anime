@@ -82,13 +82,61 @@ router.get("/genre/:genre", async (req, res) => {
     }
 })
 
+let response = {}
+
 //Vote
 
 router.post("/vote", isLoggedIn, async (req, res) => {
     console.log("Request body:", req.body);
     const anime = await Anime.findById(req.body.animeId);
-    console.log(anime);
-    res.json(anime);
+    const alreadyUpvoted = anime.upVotes.indexOf(req.user.username)
+    const alreadyDownvoted = anime.downVotes.indexOf(req.user.username)
+
+    if (alreadyUpvoted === -1 && alreadyDownvoted === -1) {
+        if(req.body.voteType === "up") {
+            anime.upVotes.push(req.user.username)
+            anime.save()
+            response.message = "Upvote Tallied!"
+        } else if(req.body.voteType === "down") {
+            anime.downVotes.push(req.user.username)
+            anime.save()
+            response.message = "Downvote Tallied!"
+        } else {
+            response.message = "Error 1"
+        }
+    } else if(alreadyUpvoted >= 0) { //Already Upvoted
+        if(req.body.voteType === "up") {
+            anime.upVotes.splice(alreadyUpvoted, 1);
+            anime.save()
+            response.message = "Upvote Removed"
+        } else if(req.body.voteType === "down") {
+            anime.upVotes.splice(alreadyUpvoted, 1);
+            anime.downVotes.push(req.user.username);
+            anime.save()
+            response.message = "Changed to downvoted"
+        } else {
+            response.message = "Error 2"
+        }
+    } else if(alreadyDownvoted >= 0) { //Already Downvoted
+        if(req.body.voteType === "up") {
+            anime.downVotes.splice(alreadyDownvoted, 1);
+            anime.upVotes.push(req.user.username);
+            anime.save();
+            response.message = "Changed to Upvote"
+        } else if(req.body.voteType === "down") {
+            anime.downVotes.splice(alreadyDownvoted, 1);
+            anime.save();
+            response.message = "Removed Downvote"
+
+        } else {
+            response.message = "Error 3"
+        }
+
+    } else {
+        response.message = "Error 4"
+    }
+
+    res.json(response);
 })
 
 //Show

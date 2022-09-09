@@ -1,11 +1,24 @@
 <%- include('partials/header') %>
-
-<h1>Sign Up</h1>
-<form action="/signup" method="POST">
-    <input type="email" name="email" placeholder="Email Address">
-    <input type="text" name="username" placeholder="Username">
-    <input type="password" name="password" placeholder="password">
-    <button type="submit">Submit</button>
-</form>
+<div class="container mt-5 d-flex flex-column mx-auto w-25">
+    <h1 class="sign-up-header">Sign Up</h1>
+    <div class="container border p-2 mb-2">
+        <form action="/signup" method="POST">
+            <div class="form-group d-flex flex-column my-2">
+                <label for="email">Email Address:</label>
+                <input type="email" name="email">
+            </div>
+            <div class="form-group d-flex flex-column my-2">
+                <label for="username">User Name:</label>
+                <input type="text" name="username">
+            </div>
+            <div class="form-group d-flex flex-column my-2">
+                <label for="password">Password:</label>
+                <input type="password" name="password">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    <a href="/login">Log in instead</a>
+</div>
 
 <%- include('partials/footer')%>

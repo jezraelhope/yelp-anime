@@ -58,6 +58,7 @@
     <!-- Upvotes -->
 
     <div class="row">
+      <h2 class="mx-5 mt-3 px-4">Upvotes:</h2>
       <div class="col-2 my-3 w-50 mx-auto" id="upvotes">
         <% if (user && anime.upVotes.indexOf(user.username) >= 0) { %>
           <button id="downvote-btn" class="btn btn-outline-danger">-</button>
@@ -79,7 +80,7 @@
      <!-- Comments -->
     <div class="container mx-5">
 
-      <h2 class="reviews row mt-3 show_comment-header mx-auto">REVIEWS:</h2>
+      <h2 class="row mt-3 show_comment-header mx-auto">Reviews:</h2>
   
       <!-- review-render -->
       <div class="comment-render">

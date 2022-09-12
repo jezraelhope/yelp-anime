@@ -26,7 +26,7 @@ router.post("/", isLoggedIn, async (req, res) => {
     } else {
         genre = "";
     }
-    
+
     const newAnime = {
         title: req.body.title,
         description: req.body.description,
@@ -82,7 +82,11 @@ router.get("/genre/:genre", async (req, res) => {
     const validGenres = ["romance", "comedy", "seinen", "isekai", "mecha", "sports", "psychological", "horror", "adventure", "scifi", "slice-of-life", "shoujo", "shonen"];
     if(validGenres.includes(req.params.genre.toLowerCase())){
         const animes = await Anime.find({genre: req.params.genre}).exec();
-        res.render("anime", {animes})
+        if(animes.length) {
+            res.render("anime", {animes})
+        } else {
+            res.render("no_genre")
+        }
     } else {
         res.send("Please enter a valid genre")
     }

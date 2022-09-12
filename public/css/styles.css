@@ -41,8 +41,20 @@
     font-family: "Roboto";
 }
 
-/* show_anime */
-
 .show_image-container img{
     width: 80%;
+}
+
+.anime-image {
+    padding-right: 2em;
+}
+
+.reviews {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.username {
+    font-weight: 400;
+    font-size: 1.2em;
 }

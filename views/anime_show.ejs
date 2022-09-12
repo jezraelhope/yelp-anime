@@ -1,13 +1,19 @@
 <%- include("partials/header") %>
 
+<%
+  function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+%>
+
 <div class="container">
     <div class="row mt-4">
         <div class="col-6 show_image-container">
             <img src="<%= anime.image %>" alt="Anime Image">
         </div>
         <div class="col-6 show_details-container">
-            <h1><%= anime.title%></h1>
-            <p><%= anime.description%></p>
+            <h1 class="mb-4"><%= anime.title%></h1>
+            <p class="mb-4"><%= anime.description%></p>
             <table class="table">
                 <tbody>
                   <tr>
@@ -24,7 +30,7 @@
                   </tr>
                   <tr>
                     <th scope="row">Genre</th>
-                    <td><%= anime.genre%></td>
+                    <td><%= capitalizeFirstLetter(anime.genre) %></td>
                   </tr>
                   <tr>
                     <th scope="row">Story Completed</th>

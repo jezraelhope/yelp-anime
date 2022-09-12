@@ -20,7 +20,13 @@ router.get("/", async (req, res) => {
 
 //Create
 router.post("/", isLoggedIn, async (req, res) => {
-    const genre = req.body.genre.toLowerCase();
+    let genre = req.body.genre;
+    if(genre){
+        genre = genre.toLowerCase();
+    } else {
+        genre = "";
+    }
+    
     const newAnime = {
         title: req.body.title,
         description: req.body.description,

@@ -3,7 +3,8 @@
 <%
   function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
-}
+  }
+  const releaseDate = `${anime.releaseDate}`
 %>
 
 <div class="container">
@@ -38,7 +39,7 @@
                   </tr>
                   <tr>
                     <th scope="row">Release Date</th>
-                    <td><%= anime.releaseDate %></td>
+                    <td><%= releaseDate.slice(4,15) %></td>
                   </tr>
                   
                 </tbody>

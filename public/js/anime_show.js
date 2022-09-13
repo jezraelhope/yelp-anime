@@ -5,9 +5,14 @@
 const downvoteBtn = document.getElementById("downvote-btn");
 const upvoteBtn = document.getElementById("upvote-btn");
 const score = document.getElementById("score");
+import ColorThief from './node_modules/colorthief/dist/color-thief.umd.js'
+const colorThief = new ColorThief();
 
-
-
+// ==================================
+//color thief demo
+// ==================================
+const imageColor = colorThief.getColor("https://upload.wikimedia.org/wikipedia/en/e/e5/SMVolume1.jpg")
+console.log(imageColor)
 // ==================================
 //SEND VOTE
 // ==================================

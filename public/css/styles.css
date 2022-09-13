@@ -1,4 +1,24 @@
+/* navbar */
 
+
+
+
+/* landing page */
+
+.landing-images {
+    height: 75vh;
+    margin: 1rem auto;
+    justify-content: center;
+}
+
+.landing-images img{
+    max-height: 20em;
+    width: 20%;
+    margin: .5rem 1rem;
+}
+
+
+/* anime show page */
 
 .anime-container {
     display: flex;
@@ -8,12 +28,13 @@
     padding-top: 1.5rem;
 }
 
-.card {
+.anime-card {
     border: 1px solid #ddd;
     border-radius: 1rem;
     width: 30%;
     display: flex;
     flex-direction: column;
+    margin: 1rem auto;
 }
 
 .image-container {
@@ -55,14 +76,4 @@ h2 {
     font-size: 1.2em;
 }
 
-.landing-images {
-    height: 75vh;
-    margin: 0 auto;
-    justify-content: center;
-}
 
-.landing-images img{
-    max-height: 20em;
-    width: 20%;
-    margin: 0 1rem;
-}

@@ -1,9 +1,8 @@
 <%- include("partials/header") %>
-
     <div class="container">
         <div class="row mt-2">
             <% animes.forEach((anime) => { %>
-                <div class="card m-3">
+                <div class="anime-card">
                     <a href="/anime/<%= anime._id %>">
                         <img class="card-image card-img-top" src="<%= anime.image%>" alt="Anime Poster">
                     </a>

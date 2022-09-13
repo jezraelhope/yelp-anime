@@ -5,7 +5,6 @@ const isLoggedIn = require('../utils/isLoggedIn');
 
 router.get("/", async (req, res) => {
     const anime = await Anime.find().exec()
-    console.log(anime)
     res.render("landing", {anime});
 })
 

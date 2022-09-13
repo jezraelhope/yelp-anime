@@ -16,13 +16,18 @@ router.post('/signup', async (req, res) => {
             email: req.body.email,
             username: req.body.username
         }), req.body.password);
+
+        req.flash("success", `Signed you up as ${newUser.username}`);
+
         passport.authenticate('local')(req, res, () => {
             res.redirect('/anime')
         });
-        req.flash("success", `Signed you up as ${newUser.username}`);
+        
     } catch (err) {
+        req.flash("error", `${err}`)
         console.log(err);
-        res.send(err)
+        res.redirect("back")
+        
     }
 });
 

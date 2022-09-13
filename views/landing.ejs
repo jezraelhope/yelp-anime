@@ -1,11 +1,13 @@
 <%- include('partials/header') %>
 
 <div class="container d-flex flex-column align-items-center mt-5 landing">
-    <div class="landing-images">
-        <% anime.forEach(anm => { %>
-            <img src="<%= anm.image %>" alt="">
-            <% }) %>
-        </div>
+    <div class="landing-images d-flex flex-wrap">
+        <% for(let i = 0; i < 8; i++) { %>
+            <img src="<%= anime[i].image %>" alt="">
+        <% } %>
+        <!-- <% anime.forEach(anm => { %>
+        <% }) %> -->
+    </div>
 
     <button><a href="/anime">Go To Anime Page</a></button>
 </div>

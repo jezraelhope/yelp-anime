@@ -6,7 +6,7 @@
 
 A code along challenge from [Dr. Joshua Bastean's](https://www.youtube.com/watch?v=0xHErfmj1F4&list=PLQSmIhc0GVPPhpBAC3y6xChtOz3RJ8abN&index=137) Full Stack Web Developer Course on Youtube. I started this challenge because I intended to create a project for a friend of mine, which requries knowledge of backend technologies. I already have some frontend knowledge and I think this project had just solidified everything for me. It also introduced me to bootstrap and ejs which I think were pretty cool.
 
-The website features a list of all users' anime lists and can be filtered based on genre. Each anime is associated with 1 user which is the author. It has a show page for that particular anime which displays different information as well as upvotes and reviews. The author can edit or delete that anime whenever they choose. The website also provides an option for users to log in or sign if they want, and if they choose to do so, it gives them the freedom to add new anime, add comment on other user's anime or upvote or downvote that anime.
+The website features a list of all users' anime lists and can be filtered based on genre. Each anime is associated with 1 user who is the author. It has a show page for that particular anime which displays different information as well as upvotes and reviews. The author can edit or delete that anime whenever they choose. The website also provides an option for users to log in or sign if they want, and if they choose to do so, it gives them the freedom to add new anime, add comment on other user's anime or upvote or downvote that anime.
 
 ## Technologies Used
 - Bootstrap

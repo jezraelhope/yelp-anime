@@ -1,6 +1,6 @@
 # Ylp Anime - A Yelp Clone
 
-[Click to view live](http://ylp-anime.herokuapp.com/)
+[Click to view live](https://yanime.onrender.com/)
 
 ## Description
 

@@ -1,79 +1,73 @@
 /* navbar */
 
-
-
+.navbar-brand {
+  font-family: "Zen Dots", serif;
+}
 
 /* landing page */
 
 .landing-images {
-    height: 75vh;
-    margin: 1rem auto;
-    justify-content: center;
+  height: 75vh;
+  margin: 1rem auto;
+  justify-content: center;
 }
 
-.landing-images img{
-    max-height: 20em;
-    width: 20%;
-    margin: .5rem 1rem;
+.landing-images img {
+  max-height: 20em;
+  width: 20%;
+  margin: 0.5rem 1rem;
 }
-
 
 /* anime show page */
 
 .anime-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    border-top: 1px solid black;
-    padding-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border-top: 1px solid black;
+  padding-top: 1.5rem;
 }
 
 .anime-card {
-    border: 1px solid #ddd;
-    border-radius: 1rem;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    margin: 1rem auto;
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin: 1rem auto;
 }
 
 .image-container {
-    width: 100%;
-    height: 20rem;
-    margin: 0 auto;
-    border-radius: 1rem 1rem 0 0;
+  width: 100%;
+  height: 20rem;
+  margin: 0 auto;
+  border-radius: 1rem 1rem 0 0;
 }
 
 .card-image {
-    width: 100%;
-    height: 30rem;
+  width: 100%;
+  height: 30rem;
 }
 
 .card-title {
-    text-align: center;
-    font-family: 'Red Rose', sans-serif;
-    font-weight: 400;
-    font-size: 1.8rem;
+  text-align: center;
+  font-family: "Red Rose", sans-serif;
+  font-weight: 400;
+  font-size: 1.8rem;
 }
 
 .card-text {
-    font-family: sans-serif;
-    line-height: 1.4;
-    font-family: "Roboto";
-}
-
-.show_image-container img{
-    width: 80%;
+  font-family: sans-serif;
+  line-height: 1.4;
+  font-family: "Roboto";
 }
 
 h2 {
-    font-size: 1.5em;
-    font-weight: 600;
+  font-size: 1.5em;
+  font-weight: 600;
 }
 
 .username {
-    font-weight: 400;
-    font-size: 1.2em;
+  font-weight: 400;
+  font-size: 1.2em;
 }
-
-

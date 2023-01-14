@@ -8,113 +8,115 @@
 %>
 
 <div class="container">
-    <div class="row mt-4">
-        <div class="col-6 show_image-container mx-auto d-flex justify-content-center">
-            <img src="<%= anime.image %>" alt="Anime Image" class="anime-image">
+  <div class="col mt-4 anime-details-container">
+      <div class="show_image-container mx-auto d-flex justify-content-center">
+          <img src="<%= anime.image %>" alt="Anime Image" class="img-fluid anime-image">
+      </div>
+      <div class="show_details-container m-4 text-center">
+        <div class="main-details mx-auto my-4">
+          <h1 class="mb-3"><%= anime.title%></h1>
+          <p class="mb-4"><%= anime.description%></p>
         </div>
-        <div class="col-6 show_details-container my-4">
-            <h1 class="mb-4"><%= anime.title%></h1>
-            <p class="mb-4"><%= anime.description%></p>
-            <table class="table">
-                <tbody>
-                  <tr>
-                    <th scope="row">Writer</th>
-                    <td><%= anime.writer%></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Studio</th>
-                    <td><%= anime.studio%></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Number of Seasons</th>
-                    <td><%= anime.seasons%></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Genre</th>
-                    <td><%= capitalizeFirstLetter(anime.genre) %></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Story Completed</th>
-                    <td><%= anime.storyCompleted%></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Release Date</th>
-                    <td><%= releaseDate.slice(4,15) %></td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-              <% if(user && user.username === anime.owner.username) { %>
-                <a href="/anime/<%= anime._id%>/edit">
-                  <button class="btn btn-outline-info btn-lg btn-block mb-2"> Edit </button>
-                </a>
-                <form action="/anime/<%= anime._id %>?_method=DELETE" method="POST">
-                  <button type="submit" class="btn btn-outline-danger btn-lg btn-block">Delete</button>
-                </form>
-              <% } %>
-        </div>
-    </div>
+          <table class="table">
+              <tbody>
+                <tr>
+                  <th scope="row">Writer</th>
+                  <td><%= anime.writer%></td>
+                </tr>
+                <tr>
+                  <th scope="row">Studio</th>
+                  <td><%= anime.studio%></td>
+                </tr>
+                <tr>
+                  <th scope="row">Number of Seasons</th>
+                  <td><%= anime.seasons%></td>
+                </tr>
+                <tr>
+                  <th scope="row">Genre</th>
+                  <td><%= capitalizeFirstLetter(anime.genre) %></td>
+                </tr>
+                <tr>
+                  <th scope="row">Story Completed</th>
+                  <td><%= anime.storyCompleted%></td>
+                </tr>
+                <tr>
+                  <th scope="row">Release Date</th>
+                  <td><%= releaseDate.slice(4,15) %></td>
+                </tr>
+              </tbody>
+            </table>
+            <% if(user && user.username === anime.owner.username) { %>
+              <a href="/anime/<%= anime._id%>/edit">
+                <button class="btn btn-outline-info btn-lg btn-block mb-2"> Edit </button>
+              </a>
+              <form action="/anime/<%= anime._id %>?_method=DELETE" method="POST">
+                <button type="submit" class="btn btn-outline-danger btn-lg btn-block">Delete</button>
+              </form>
+            <% } %>
+      </div>
+  </div>
 
     <!-- Upvotes -->
 
-    <div class="row">
-      <h2 class="mx-5 mt-3 px-4">Upvotes:</h2>
-      <div class="col-2 my-3 w-50 mx-auto" id="upvotes">
-        <% if (user && anime.upVotes.indexOf(user.username) >= 0) { %>
-          <button id="downvote-btn" class="btn btn-outline-danger">-</button>
-        <% } else if (user) { %>
-          <button id="downvote-btn" class="btn btn-outline-danger">-</button>
-        <% } %>
+  <div class="container row">
+    <h2 class="mt-3 mx-3 upvotes-container">Upvotes:</h2>
+    <div class="my-3 mx-auto" id="upvotes">
+      <% if (user && anime.upVotes.indexOf(user.username) >= 0) { %>
+        <button id="downvote-btn" class="btn btn-outline-danger">-</button>
+      <% } else if (user) { %>
+        <button id="downvote-btn" class="btn btn-outline-danger">-</button>
+      <% } %>
 
-        <span id="score" class="mx-1 pt-2"><%= anime.upVotes.length - anime.downVotes.length %></span>
+      <span id="score" class="mx-1 pt-2"><%= anime.upVotes.length - anime.downVotes.length %></span>
 
-        <% if (user && anime.downVotes.indexOf(user.username) >=0 ) { %>
-          <button id="upvote-btn" class="btn btn-outline-success">+</button>
-        <%} else if (user) { %>
-          <button id="upvote-btn" class="btn btn-outline-success">+</button>
-        <% } %>
-      </div>
-      <div class="w-50"> </div>
+      <% if (user && anime.downVotes.indexOf(user.username) >=0 ) { %>
+        <button id="upvote-btn" class="btn btn-outline-success">+</button>
+      <%} else if (user) { %>
+        <button id="upvote-btn" class="btn btn-outline-success">+</button>
+      <% } %>
     </div>
+    <div class="w-50"> </div>
+  </div>
 
      <!-- Comments -->
-    <div class="container mx-5">
+  <div class="container">
 
-      <h2 class="row mt-3 show_comment-header mx-auto">Reviews:</h2>
-  
-      <!-- review-render -->
-      <div class="comment-render">
-        <% comments.forEach(comment => { %>
-          <div class="show_comment-container py-1 px-2 border mt-2">
-            <h3 class="username my-2 border-bottom">
-              <%= `${comment.user.username} says:` %>
-            </h3>
-            <p>
-              <%= comment.text %>
-            </p>
-            
-            <!-- edit/delete buttons -->
-            
-            <% if(user && user.username === comment.user.username) { %>
-              <div class="d-flex flex-row">
-                <a href="/anime/<%= anime._id %>/comments/<%= comment._id%>/edit" class="btn btn-sm btn-success my-1 mx-1">Edit</a>
-                <form action="/anime/<%= anime._id %>/comments/<%= comment._id %>?_method=DELETE" class="w-50 my-1" method="POST">
-                  <button class="btn btn-danger btn-sm mx-1">Delete</button>
-                </form>
-              </div>
-              <% } %>
+    <h2 class="row mt-3 show_comment-header mx-auto">Reviews:</h2>
+
+    <!-- review-render -->
+    <div class="comment-render">
+      <% comments.forEach(comment => { %>
+        <div class="show_comment-container py-1 px-2 border mt-2">
+          <h3 class="username my-2 border-bottom">
+            <%= `${comment.user.username} says:` %>
+          </h3>
+          <p>
+            <%= comment.text %>
+          </p>
+          
+          <!-- edit/delete buttons -->
+          
+          <% if(user && user.username === comment.user.username) { %>
+            <div class="d-flex flex-row">
+              <a href="/anime/<%= anime._id %>/comments/<%= comment._id%>/edit" class="btn btn-sm btn-success my-1 mx-1">Edit</a>
+              <form action="/anime/<%= anime._id %>/comments/<%= comment._id %>?_method=DELETE" class="w-50 my-1" method="POST">
+                <button class="btn btn-danger btn-sm mx-1">Delete</button>
+              </form>
             </div>
-            <% }) %>
+            <% } %>
           </div>
-          <a href="/anime/<%= anime._id%>/comments/new">
-            <button class="btn btn-success btn-large mb-4 mt-3">Add Review</button>
-          </a>
+          <% }) %>
         </div>
+        <a href="/anime/<%= anime._id%>/comments/new">
+          <button class="btn btn-success btn-large mb-4 mt-3">Add Review</button>
+        </a>
+  </div>
         
-        <div class="py-5"></div>
-      </div>
-      <script>
-        var animeId = "<%- anime._id %>"
+  <div class="py-5"></div>
+  </div>
+<script>
+  var animeId = "<%- anime._id %>"
 </script>
+  
 <script src="/js/anime_show.js"></script>
 <%- include("partials/footer") %>

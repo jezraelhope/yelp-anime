@@ -71,3 +71,9 @@ h2 {
   font-weight: 400;
   font-size: 1.2em;
 }
+
+/* login / signup */
+
+.login-signup {
+  max-width: 400px;
+}

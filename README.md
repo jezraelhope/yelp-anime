@@ -1,6 +1,6 @@
 # Ylp Anime - A Yelp Clone
 
-[Click to view live](https://yanime.onrender.com/)
+[Click to view live]([https://yanime.onrender.com/](https://jezraelhope.github.io/yanime-main/))
 
 ## Description
 
